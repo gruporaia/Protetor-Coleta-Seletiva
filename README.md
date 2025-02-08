@@ -28,7 +28,7 @@ Os seguintes itens são reconhecidos pelo modelo:
 - **Python** 🐍 (linguagem principal do projeto)
 
 ## 🚀 Como Rodar o Projeto
-Certifique-se de possuir o python (INCLUIR VERSÃO) instalado. 
+ 🚨ATENÇÃO: Certifique-se de possuir o python (INCLUIR VERSÃO) instalado. 
 Uma outra opção útil é utilizar um ambiente [Anaconda](https://www.anaconda.com/) para facilitar o gerenciamento de versões entre diferentes bibliotecas.
 ### 1️⃣ Clone o Repositório
 ```bash
