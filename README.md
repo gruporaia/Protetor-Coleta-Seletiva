@@ -54,5 +54,12 @@ Se você deseja contribuir para o projeto, sinta-se à vontade para abrir um **p
 Este projeto está licenciado sob a **MIT License**. Sinta-se livre para utilizá-lo e adaptá-lo conforme necessário.
 
 ---
-🔗 **Desenvolvido por [Seu Nome]** | 💡 Projeto em parceria com a cooperativa de reciclagem
+ ## Organização responsável 
+ ### RAIA - Rede de Avanço em Inteligência Artificial | 💡 Projeto em parceria com a cooperativa ...
+- [Gustavo Sampaio](https://www.linkedin.com/in/gussampaio/) (Gerente do projeto) 
+- [Lucas Artur De Vlieger](https://www.linkedin.com/in/artur-de-vlieger-336829252/) (Desenvolvedor) 
+- [Bombril](https://www.linkedin.com/in/lucas-de-souza-brandão-590b1228b/) (Desenvolvedor)
+- [Pedro Lucas](https://www.linkedin.com/in/pedro-lucas-figueiredo-bahiense/) (Desenvolvedor)
+- [Matheus Victal](https://www.linkedin.com/in/matheus-victal-cerqueira-2a35251b3/) (Desenvolvedor)
+- [Marcelo Freire](https://www.linkedin.com/in/marcelosfreires/) (Facilitador)
 
