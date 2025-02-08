@@ -16,9 +16,9 @@ Os seguintes itens são reconhecidos pelo modelo:
 - 🦂 **Escorpião** (animal presente na área onde o modelo será implantado)
 
 ## 🎯 Objetivos
-✅ Reduzir riscos de incêndios causados por baterias e pilhas.
-✅ Evitar acidentes com materiais perfurantes.
-✅ Alertar sobre a presença de escorpiões na esteira.
+✅ Reduzir riscos de incêndios causados por baterias e pilhas. \
+✅ Evitar acidentes com materiais perfurantes.\
+✅ Alertar sobre a presença de escorpiões na esteira.\
 ✅ Oferecer uma ferramenta prática e acessível para os trabalhadores.
 
 ## 🛠️ Tecnologias Utilizadas
@@ -28,8 +28,8 @@ Os seguintes itens são reconhecidos pelo modelo:
 - **Python** 🐍 (linguagem principal do projeto)
 
 ## 🚀 Como Rodar o Projeto
- 🚨ATENÇÃO: Certifique-se de possuir o python (INCLUIR VERSÃO) instalado. 
-Uma outra opção útil é utilizar um ambiente [Anaconda](https://www.anaconda.com/) para facilitar o gerenciamento de versões entre diferentes bibliotecas.
+ 🚨ATENÇÃO\
+ Certifique-se de possuir o python (INCLUIR VERSÃO) instalado. Além disso, crie um [ambiente virtual](https://docs.python.org/3/library/venv.html) ou utilize um ambiente [Anaconda](https://www.anaconda.com/) para facilitar o gerenciamento de versões entre diferentes bibliotecas.
 ### 1️⃣ Clone o Repositório
 ```bash
 git clone https://github.com/seuusuario/yolo-v11-coleta-seletiva.git
