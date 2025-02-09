@@ -64,5 +64,5 @@ Se você deseja contribuir para o projeto, sinta-se à vontade para abrir um **p
 - [Pedro Lucas](https://www.linkedin.com/in/pedro-lucas-figueiredo-bahiense/) (Desenvolvedor)
 - [Matheus Victal](https://www.linkedin.com/in/matheus-victal-cerqueira-2a35251b3/) (Desenvolvedor)
 - [Marcelo Freire](https://www.linkedin.com/in/marcelosfreires/) (Facilitador)
-- 💡 Projeto em parceria com a cooperativa ...
+- 💡 Projeto em parceria com a [Cooperativa Acácia](https://coleta.webnode.page)
 
