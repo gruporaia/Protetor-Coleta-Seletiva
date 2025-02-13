@@ -8,12 +8,13 @@ import pygame
 
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load("sons/alerta.mp3")
-alert_cellphone = pygame.mixer.music.load("sons/Celular.mp3")
-alert_bat_cellphone = pygame.mixer.music.load("sons/Bateria_de_celular.mp3")
-alert_battery = pygame.mixer.music.load("sons/Bateria.mp3")
-alert_needle = pygame.mixer.music.load("sons/Seringa.mp3")
-alert_scorpion = pygame.mixer.music.load("sons/Escorpiao.mp3")
+
+alert_general = pygame.mixer.Sound("sons/alerta.mp3")
+alert_cellphone = pygame.mixer.Sound("sons/Celular.mp3")
+alert_bat_cellphone = pygame.mixer.Sound("sons/Bateria_de_celular.mp3")
+alert_battery = pygame.mixer.Sound("sons/Bateria.mp3")
+alert_needle = pygame.mixer.Sound("sons/Seringa.mp3")
+alert_scorpion = pygame.mixer.Sound("sons/Escorpiao.mp3")
 
 
 def sleep_and_clear_success():
@@ -68,24 +69,25 @@ def _display_detected_frames(model, st_frame, image):
             detected_items.update(st.session_state['unique_classes'])
 
             cellphone, cellphone_battery, battery, needle, scorpion = classify_waste_type(detected_items)
-
-            if not pygame.mixer.music.get_busy():
-                pygame.mixer.music.play()
+            print(cellphone, cellphone_battery, battery, needle, scorpion)
+            # if not pygame.mixer.music.get_busy():
+            #     pygame.mixer.music.play()
 
             if cellphone:
-                if not pygame.mixer.music.get_busy():
+                if not pygame.mixer.get_busy():
                     alert_cellphone.play()
             if cellphone_battery:
-                if not pygame.mixer.music.get_busy():
+                if not pygame.mixer.get_busy():
                     alert_bat_cellphone.play()
             if battery:
-                if not pygame.mixer.music.get_busy():
+                if not pygame.mixer.get_busy():
                     alert_battery.play()
             if needle:
-                if not pygame.mixer.music.get_busy():
+                if not pygame.mixer.get_busy():
                     alert_needle.play()
             if scorpion:
-                if not pygame.mixer.music.get_busy():
+                print("Escorpião detectado")
+                if not pygame.mixer.get_busy():
                     alert_scorpion.play()
 
             threading.Thread(target=sleep_and_clear_success).start()
