@@ -8,8 +8,8 @@ if root_path not in sys.path:
 ROOT = root_path.relative_to(Path.cwd())
 
 # ML Model config
-MODEL_DIR = ROOT / 'weights'
-DETECTION_MODEL = MODEL_DIR / 'best.pt'
+MODEL_DIR = ROOT / 'models_weights'
+DETECTION_MODEL = MODEL_DIR / 'yolo11s_finetunned.pt'
 # Webcam
 WEBCAM_PATH = 0
 
@@ -18,4 +18,3 @@ CELLPHONE_BATTERY = ['Bateria de celular']
 BATTERY = ['Bateria de notebook']
 NEEDLE = ['Seringa']
 SCORPION = ['Escorpião']
-    

@@ -69,7 +69,6 @@ def _display_detected_frames(model, st_frame, image):
 
             cellphone, cellphone_battery, battery, needle, scorpion = classify_waste_type(detected_items)
 
-
             if not pygame.mixer.music.get_busy():
                 pygame.mixer.music.play()
 
@@ -88,6 +87,7 @@ def _display_detected_frames(model, st_frame, image):
             if scorpion:
                 if not pygame.mixer.music.get_busy():
                     alert_scorpion.play()
+
             threading.Thread(target=sleep_and_clear_success).start()
             st.session_state['last_detection_time'] = time.time()
 
