@@ -13,8 +13,9 @@ DETECTION_MODEL = MODEL_DIR / 'best.pt'
 # Webcam
 WEBCAM_PATH = 0
 
-CELLPHONE = ['cardboard_box']
-CELLPHONE_BATTERY = ['plastic_bag']
-BATTERY = ['cardboard_box']
-NEEDLE = ['cardboard_box']
-SCORPION = ['cardboard_box']    
+CELLPHONE = ['Celular']
+CELLPHONE_BATTERY = ['Bateria de celular']
+BATTERY = ['Bateria de notebook']
+NEEDLE = ['Seringa']
+SCORPION = ['Escorpião']
+    

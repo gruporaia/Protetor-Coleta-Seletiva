@@ -3,16 +3,18 @@ import streamlit as st
 import helper
 import settings
 
+PROJECT_NAME = "EcoVision"
+
 st.set_page_config(
-    page_title="Waste Detection",
+    page_title=PROJECT_NAME,
 )
 
-st.sidebar.title("Detect Console")
+st.sidebar.title("Console de detecção")
 
 model_path = Path(settings.DETECTION_MODEL)
 
-st.title("Intelligent waste segregation system")
-st.write("Start detecting objects in the webcam stream by clicking the button below. To stop the detection, click stop button in the top right corner of the webcam stream.")
+st.title("Vamos começar a detecção de maneira segura!")
+st.write("Previna-se utilizando ECOVISION para identificar itens perigosos na esteira de coleta seletiva.")
 st.markdown(
 """
 <style>
@@ -53,5 +55,5 @@ except Exception as ex:
     st.error(ex)
 helper.play_webcam(model)
 
-st.sidebar.markdown("This is a demo of the waste detection model.", unsafe_allow_html=True)
+st.sidebar.markdown(f"{PROJECT_NAME} é um projeto de visão computacional desenvolvido para identificar itens perigosos em esteiras de coleta seletiva, utilizando o modelo YOLO v11. A solução busca prevenir acidentes como incêndios e perfurações, garantindo mais segurança para os trabalhadores da cooperativa.", unsafe_allow_html=True)
 
