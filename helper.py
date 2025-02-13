@@ -4,8 +4,11 @@ import streamlit as st
 import cv2
 import settings
 import threading
-import pygame 
+import pygame
+import logging
 
+logging.basicConfig(filename='sound_events.log', level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s')
 pygame.init()
 pygame.mixer.init()
 
@@ -22,12 +25,6 @@ alert_syringe = pygame.mixer.Sound("sons/agulha.mp3")
 channel_syringe = pygame.mixer.Channel(4)
 alert_scorpion = pygame.mixer.Sound("sons/escorpiao.mp3")
 channel_scorpion = pygame.mixer.Channel(5)
-
-def sleep_and_clear_success():
-    time.sleep(3)
-    st.session_state['recyclable_placeholder'].empty()
-    st.session_state['non_recyclable_placeholder'].empty()
-    st.session_state['hazardous_placeholder'].empty()
 
 def load_model(model_path):
     model = YOLO(model_path)
@@ -48,45 +45,60 @@ def remove_dash_from_class_name(class_name):
 
 def _display_detected_frames(model, st_frame, image):
     image = cv2.resize(image, (640, int(640 * (9/16))))
-    
-    # Inicializa os placeholders e variáveis no session_state se ainda não existirem
+
     if 'unique_classes' not in st.session_state:
         st.session_state['unique_classes'] = set()
-
-    if 'recyclable_placeholder' not in st.session_state:
-        st.session_state['recyclable_placeholder'] = st.sidebar.empty()
-    if 'non_recyclable_placeholder' not in st.session_state:
-        st.session_state['non_recyclable_placeholder'] = st.sidebar.empty()
-    if 'hazardous_placeholder' not in st.session_state:
-        st.session_state['hazardous_placeholder'] = st.sidebar.empty()
-
-    if 'last_detection_time' not in st.session_state:
-        st.session_state['last_detection_time'] = time.time()
-    
-    # Verifica se já se passaram 3 segundos desde a última detecção para limpar os placeholders
-    if time.time() - st.session_state['last_detection_time'] > 3:
-        st.session_state['recyclable_placeholder'].empty()
-        st.session_state['non_recyclable_placeholder'].empty()
-        st.session_state['hazardous_placeholder'].empty()
+    if 'recent_detections_list' not in st.session_state:
+        st.session_state['recent_detections_list'] = []
+    if 'recent_logs_placeholder' not in st.session_state:
+        st.session_state['recent_logs_placeholder'] = st.sidebar.empty()
+    if 'last_log_time' not in st.session_state:
+        st.session_state['last_log_time'] = 0
     
     # Realiza a predição no frame atual
     res = model.predict(image, conf=0.6)
     names = model.names
     detected_items = set()
 
+    # Mostrar logs recentes no sidebar
+    log_text = "<b>Últimos Objetos Detectados:</b>\n"
+    for log in st.session_state['recent_detections_list']:
+        log_text += f"- {log}\n"
+    st.session_state['recent_logs_placeholder'].markdown(log_text, unsafe_allow_html=True)
+
     for result in res:
         new_classes = set([names[int(c)] for c in result.boxes.cls])
         # Se houver uma alteração nas classes detectadas, atualize a interface
-        if new_classes != st.session_state['unique_classes']:
+        if new_classes != st.session_state['unique_classes'] and time.time() - st.session_state['last_log_time'] >= 3:
             st.session_state['unique_classes'] = new_classes
-            # Limpa os placeholders (pode ser também onde você exibe informações detalhadas)
-            st.session_state['recyclable_placeholder'].markdown('')
-            st.session_state['non_recyclable_placeholder'].markdown('')
-            st.session_state['hazardous_placeholder'].markdown('')
+            st.session_state['recent_logs_placeholder'].markdown('')
+
             detected_items.update(st.session_state['unique_classes'])
             
             cellphone, cellphone_battery, battery, needle, syringe, scorpion = classify_waste_type(detected_items)
             print(cellphone, cellphone_battery, battery, needle, scorpion)
+
+            if time.time() - st.session_state['last_log_time'] >= 5:
+                logging.info(f"Classes detectadas neste frame: {detected_items}")
+                st.session_state['last_log_time'] = time.time() # Atualiza o tempo do último log
+
+
+            # Atualizar lista de detecções recentes
+            if detected_items:
+                detection_string = ", ".join(detected_items)
+
+                log_entry = f"{time.strftime('%H:%M:%S')} - Objetos: {detection_string}" 
+
+                st.session_state['recent_detections_list'].insert(0, log_entry)
+                
+                st.session_state['recent_detections_list'] = st.session_state['recent_detections_list'][:5] # Manter apenas os 5 mais recentes
+
+                # Mostrar logs recentes no sidebar
+                log_text = "<b>Últimos Objetos Detectados:</b>\n"
+                for log in st.session_state['recent_detections_list']:
+                    log_text += f"- {log}\n"
+                st.session_state['recent_logs_placeholder'].markdown(log_text, unsafe_allow_html=True)
+                
             # Reproduz os alertas sonoros conforme a classificação
             if cellphone:
                 if not channel_cellphone.get_busy():
