@@ -8,12 +8,12 @@ import pygame
 
 pygame.init()
 pygame.mixer.init()
-pygame.mixer.music.load("alerta.mp3")
-alert_cellphone = pygame.mixer.music.load("celular.mp3")
-alert_bat_cellphone = pygame.mixer.music.load("Bateria_de_celular.mp3")
-alert_battery = pygame.mixer.music.load("Bateria.mp3")
-alert_needle = pygame.mixer.music.load("Seringa.mp3")
-alert_scorpion = pygame.mixer.music.load("Escorpiao.mp3")
+pygame.mixer.music.load("sons/alerta.mp3")
+alert_cellphone = pygame.mixer.music.load("sons/Celular.mp3")
+alert_bat_cellphone = pygame.mixer.music.load("sons/Bateria_de_celular.mp3")
+alert_battery = pygame.mixer.music.load("sons/Bateria.mp3")
+alert_needle = pygame.mixer.music.load("sons/Seringa.mp3")
+alert_scorpion = pygame.mixer.music.load("sons/Escorpiao.mp3")
 
 
 def sleep_and_clear_success():
