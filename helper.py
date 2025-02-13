@@ -9,6 +9,12 @@ import pygame
 pygame.init()
 pygame.mixer.init()
 pygame.mixer.music.load("alerta.mp3")
+alert_cellphone = pygame.mixer.music.load("celular.mp3")
+alert_bat_cellphone = pygame.mixer.music.load("Bateria_de_celular.mp3")
+alert_battery = pygame.mixer.music.load("Bateria.mp3")
+alert_needle = pygame.mixer.music.load("Seringa.mp3")
+alert_scorpion = pygame.mixer.music.load("Escorpiao.mp3")
+
 
 def sleep_and_clear_success():
     time.sleep(3)
@@ -21,11 +27,13 @@ def load_model(model_path):
     return model
 
 def classify_waste_type(detected_items):
-    recyclable_items = set(detected_items) & set(settings.RECYCLABLE)
-    non_recyclable_items = set(detected_items) & set(settings.NON_RECYCLABLE)
-    hazardous_items = set(detected_items) & set(settings.HAZARDOUS)
+    cellphone = set(detected_items) & set(settings.CELLPHONE)
+    non_cellphone = set(detected_items) & set(settings.CELLPHONE_BATTERY)
+    battery = set(detected_items) & set(settings.BATTERY)
+    needle = set(detected_items) & set(settings.NEEDLE)
+    scorpion = set(detected_items) & set(settings.SCORPION)
     
-    return recyclable_items, non_recyclable_items, hazardous_items
+    return cellphone, non_cellphone, battery, needle, scorpion
 
 def remove_dash_from_class_name(class_name):
     return class_name.replace("_", " ")
@@ -59,31 +67,27 @@ def _display_detected_frames(model, st_frame, image):
             st.session_state['hazardous_placeholder'].markdown('')
             detected_items.update(st.session_state['unique_classes'])
 
-            recyclable_items, non_recyclable_items, hazardous_items = classify_waste_type(detected_items)
+            cellphone, cellphone_battery, battery, needle, scorpion = classify_waste_type(detected_items)
 
-            if recyclable_items or non_recyclable_items or hazardous_items:
+
+            if not pygame.mixer.music.get_busy():
+                pygame.mixer.music.play()
+
+            if cellphone:
                 if not pygame.mixer.music.get_busy():
-                    pygame.mixer.music.play()
-
-            if recyclable_items:
-                detected_items_str = "\n- ".join(remove_dash_from_class_name(item) for item in recyclable_items)
-                st.session_state['recyclable_placeholder'].markdown(
-                    f"<div class='stRecyclable'>Recyclable items:\n\n- {detected_items_str}</div>",
-                    unsafe_allow_html=True
-                )
-            if non_recyclable_items:
-                detected_items_str = "\n- ".join(remove_dash_from_class_name(item) for item in non_recyclable_items)
-                st.session_state['non_recyclable_placeholder'].markdown(
-                    f"<div class='stNonRecyclable'>Non-Recyclable items:\n\n- {detected_items_str}</div>",
-                    unsafe_allow_html=True
-                )
-            if hazardous_items:
-                detected_items_str = "\n- ".join(remove_dash_from_class_name(item) for item in hazardous_items)
-                st.session_state['hazardous_placeholder'].markdown(
-                    f"<div class='stHazardous'>Hazardous items:\n\n- {detected_items_str}</div>",
-                    unsafe_allow_html=True
-                )
-
+                    alert_cellphone.play()
+            if cellphone_battery:
+                if not pygame.mixer.music.get_busy():
+                    alert_bat_cellphone.play()
+            if battery:
+                if not pygame.mixer.music.get_busy():
+                    alert_battery.play()
+            if needle:
+                if not pygame.mixer.music.get_busy():
+                    alert_needle.play()
+            if scorpion:
+                if not pygame.mixer.music.get_busy():
+                    alert_scorpion.play()
             threading.Thread(target=sleep_and_clear_success).start()
             st.session_state['last_detection_time'] = time.time()
 
