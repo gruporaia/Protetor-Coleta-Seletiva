@@ -9,21 +9,22 @@ import logging
 
 logging.basicConfig(filename='sound_events.log', level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s')
+
+
 pygame.init()
 pygame.mixer.init()
 
-alert_general = pygame.mixer.Sound("sons/alerta.mp3")
-alert_cellphone = pygame.mixer.Sound("sons/celular.mp3")
+alert_cellphone = pygame.mixer.Sound("celular.mp3")
 channel_cellphone = pygame.mixer.Channel(0)
-alert_bat_cellphone = pygame.mixer.Sound("sons/bateria_de_celular.mp3")
+alert_bat_cellphone = pygame.mixer.Sound("Bateria_de_celular.mp3")
 channel_bat_cellphone = pygame.mixer.Channel(1)
-alert_battery = pygame.mixer.Sound("sons/bateria.mp3")
+alert_battery = pygame.mixer.Sound("Bateria.mp3")
 channel_battery = pygame.mixer.Channel(2)
-alert_needle = pygame.mixer.Sound("sons/seringa.mp3")
+alert_needle = pygame.mixer.Sound("Seringa.mp3")
 channel_needle = pygame.mixer.Channel(3)
-alert_syringe = pygame.mixer.Sound("sons/agulha.mp3")
+alert_syringe = pygame.mixer.Sound("Seringa.mp3")
 channel_syringe = pygame.mixer.Channel(4)
-alert_scorpion = pygame.mixer.Sound("sons/escorpiao.mp3")
+alert_scorpion = pygame.mixer.Sound("Escorpiao.mp3")
 channel_scorpion = pygame.mixer.Channel(5)
 
 def load_model(model_path):
@@ -37,7 +38,7 @@ def classify_waste_type(detected_items):
     needle = set(detected_items) & set(settings.NEEDLE)
     syringe = set(detected_items) & set(settings.SYRINGE)
     scorpion = set(detected_items) & set(settings.SCORPION)
-    
+
     return cellphone, non_cellphone, battery, needle, syringe, scorpion
 
 def remove_dash_from_class_name(class_name):
@@ -54,8 +55,8 @@ def _display_detected_frames(model, st_frame, image):
         st.session_state['recent_logs_placeholder'] = st.sidebar.empty()
     if 'last_log_time' not in st.session_state:
         st.session_state['last_log_time'] = 0
-    
-    # Realiza a predição no frame atual
+
+
     res = model.predict(image, conf=0.6)
     names = model.names
     detected_items = set()
@@ -66,40 +67,27 @@ def _display_detected_frames(model, st_frame, image):
         log_text += f"- {log}\n"
     st.session_state['recent_logs_placeholder'].markdown(log_text, unsafe_allow_html=True)
 
+
     for result in res:
         new_classes = set([names[int(c)] for c in result.boxes.cls])
-        # Se houver uma alteração nas classes detectadas, atualize a interface
+
         if new_classes != st.session_state['unique_classes'] and time.time() - st.session_state['last_log_time'] >= 3:
             st.session_state['unique_classes'] = new_classes
-            st.session_state['recent_logs_placeholder'].markdown('')
+            st.session_state['recent_logs_placeholder'].markdown('') # Limpar placeholder de logs recentes
 
             detected_items.update(st.session_state['unique_classes'])
-            
-            cellphone, cellphone_battery, battery, needle, syringe, scorpion = classify_waste_type(detected_items)
-            print(cellphone, cellphone_battery, battery, needle, scorpion)
 
-            if time.time() - st.session_state['last_log_time'] >= 5:
+            cellphone, cellphone_battery, battery, needle, syringe, scorpion = classify_waste_type(detected_items)
+
+            # Verifica se passaram 5 segundos desde o último log
+            if time.time() - st.session_state['last_log_time'] >= 5 and detected_items:
                 logging.info(f"Classes detectadas neste frame: {detected_items}")
                 st.session_state['last_log_time'] = time.time() # Atualiza o tempo do último log
-
-
-            # Atualizar lista de detecções recentes
-            if detected_items:
-                detection_string = ", ".join(detected_items)
-
-                log_entry = f"{time.strftime('%H:%M:%S')} - Objetos: {detection_string}" 
-
-                st.session_state['recent_detections_list'].insert(0, log_entry)
-                
+                detection_string = ", ".join(detected_items) # Formatando para string
+                log_entry = f"{time.strftime('%H:%M:%S')} - Objetos: {detection_string}" # Adicionar timestamp
+                st.session_state['recent_detections_list'].insert(0, log_entry) # Adicionar no inicio da lista
                 st.session_state['recent_detections_list'] = st.session_state['recent_detections_list'][:5] # Manter apenas os 5 mais recentes
 
-                # Mostrar logs recentes no sidebar
-                log_text = "<b>Últimos Objetos Detectados:</b>\n"
-                for log in st.session_state['recent_detections_list']:
-                    log_text += f"- {log}\n"
-                st.session_state['recent_logs_placeholder'].markdown(log_text, unsafe_allow_html=True)
-                
-            # Reproduz os alertas sonoros conforme a classificação
             if cellphone:
                 if not channel_cellphone.get_busy():
                     alert_cellphone.play()
@@ -118,9 +106,7 @@ def _display_detected_frames(model, st_frame, image):
             if scorpion:
                 if not channel_scorpion.get_busy():
                     alert_scorpion.play()
-            
-            # Atualiza o tempo da última detecção
-            st.session_state['last_detection_time'] = time.time()
+
 
     res_plotted = res[0].plot()
     st_frame.image(res_plotted, channels="BGR")
