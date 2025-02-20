@@ -97,15 +97,19 @@ def _display_detected_frames(model, st_frame, image):
             if battery:
                 if not channel_battery.get_busy():
                     alert_battery.play()
-            if needle:
-                if not channel_needle.get_busy():
-                    alert_needle.play()
-            if syringe:
-                if not channel_syringe.get_busy():
-                    alert_syringe.play()
             if scorpion:
                 if not channel_scorpion.get_busy():
                     alert_scorpion.play()
+            if needle and syringe:
+                if not channel_syringe.get_busy():
+                    alert_syringe.play()
+            elif needle:
+                time.sleep(1)  # Aguarda 1 segundo antes de tocar o alerta de agulha
+                if not channel_needle.get_busy():
+                    alert_needle.play()
+            elif syringe:
+                if not channel_syringe.get_busy():
+                    alert_syringe.play()
             
             # Atualiza o tempo da última detecção
             st.session_state['last_detection_time'] = time.time()
