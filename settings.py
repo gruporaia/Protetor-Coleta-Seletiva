@@ -9,13 +9,14 @@ ROOT = root_path.relative_to(Path.cwd())
 
 # ML Model config
 MODEL_DIR = ROOT / 'models_weights'
-DETECTION_MODEL = MODEL_DIR / 'yolo11s_finetunned.pt'
+DETECTION_MODEL = MODEL_DIR / 'yolo11m_finetunned.pt'
 # Webcam
 WEBCAM_PATH = 0
 
 CELLPHONE = ['Celular']
-CELLPHONE_BATTERY = ['Bateria de celular']
-BATTERY = ['Bateria de notebook']
+CELLPHONE_BATTERY = ['Bateria_Celular']
+BATTERY = ['Bateria_Notebook']
 NEEDLE = ['Agulha']
 SYRINGE = ['Seringa']
 SCORPION = ['Escorpiao']
+PILHA = ['Pilha']

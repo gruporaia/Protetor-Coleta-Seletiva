@@ -32,8 +32,8 @@ Os seguintes itens são reconhecidos pelo modelo:
  Certifique-se de possuir o python (INCLUIR VERSÃO) instalado. Além disso, crie um [ambiente virtual](https://docs.python.org/3/library/venv.html) ou utilize um ambiente [Anaconda](https://www.anaconda.com/) para facilitar o gerenciamento de versões entre diferentes bibliotecas.
 ### 1️⃣ Clone o Repositório
 ```bash
-git clone https://github.com/seuusuario/yolo-v11-coleta-seletiva.git
-cd yolo-v11-coleta-seletiva
+git clone https://github.com/gruporaia/Protetor-Coleta-Seletiva.git
+cd Protetor-Coleta-Seletiva
 ```
 
 ### 2️⃣ Instale as Dependências
@@ -59,8 +59,8 @@ Se você deseja contribuir para o projeto, sinta-se à vontade para abrir um **p
  ## Organização responsável 
  ### RAIA - Rede de Avanço em Inteligência Artificial 
 - [Gustavo Sampaio](https://www.linkedin.com/in/gussampaio/) (Gerente do projeto) 
-- [Lucas Artur De Vlieger](https://www.linkedin.com/in/artur-de-vlieger-336829252/) (Desenvolvedor) 
-- [Lucas de Souza](https://www.linkedin.com/in/lucas-de-souza-brandão-590b1228b/) (Desenvolvedor)
+- [Artur De Vlieger](https://www.linkedin.com/in/artur-de-vlieger-336829252/) (Desenvolvedor) 
+- [Lucas de Souza Brandão](https://www.linkedin.com/in/lucas-de-souza-brandão-590b1228b/) (Desenvolvedor)
 - [Pedro Lucas](https://www.linkedin.com/in/pedro-lucas-figueiredo-bahiense/) (Desenvolvedor)
 - [Matheus Victal](https://www.linkedin.com/in/matheus-victal-cerqueira-2a35251b3/) (Desenvolvedor)
 - [Marcelo Freire](https://www.linkedin.com/in/marcelosfreires/) (Facilitador)
