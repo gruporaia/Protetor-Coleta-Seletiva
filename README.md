@@ -45,6 +45,10 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
+
+## 📷 Exemplo de Detecção
+ ![Image](https://github.com/user-attachments/assets/d6cfde83-a887-4188-bc18-ee0cc3401764)
+ 
 ---
  ## Organização responsável 
  ### RAIA - Rede de Avanço em Inteligência Artificial 
