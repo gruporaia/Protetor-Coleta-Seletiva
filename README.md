@@ -45,16 +45,6 @@ pip install -r requirements.txt
 ```bash
 streamlit run app.py
 ```
-
-## 📷 Exemplo de Detecção
-(Incluirr uma imagem ou GIF mostrando a interface em funcionamento na cooperativa)
-
-## 📌 Contribuições
-Se você deseja contribuir para o projeto, sinta-se à vontade para abrir um **pull request** ou reportar problemas na aba de **issues**.
-
-## 📜 Licença
-
-
 ---
  ## Organização responsável 
  ### RAIA - Rede de Avanço em Inteligência Artificial 
